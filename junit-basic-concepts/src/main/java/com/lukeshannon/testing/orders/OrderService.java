@@ -13,7 +13,10 @@ public class OrderService {
 		return repo.placeOrder(order);
 	}
 	
-	public Order getOrder(long id) {
+	public Order getOrder(long id) throws NonValidIdException {
+		if (id < 0) {
+			throw new NonValidIdException();
+		}
 		return repo.getOrder(id);
 	}
 	
