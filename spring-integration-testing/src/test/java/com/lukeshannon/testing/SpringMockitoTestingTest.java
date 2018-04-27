@@ -1,38 +1,26 @@
 package com.lukeshannon.testing;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import org.junit.Test;
+
+import com.lukeshannon.testing.orders.Order;
+import com.lukeshannon.testing.orders.OrderService;
 
 /**
  * Unit test for simple App.
  */
 public class SpringMockitoTestingTest 
-    extends TestCase
+
 {
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public SpringMockitoTestingTest( String testName )
-    {
-        super( testName );
-    }
-
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( SpringMockitoTestingTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+	@Test
+    public void testService() {
+		OrderService orderService = mock(OrderService.class);
+    	Order order = new Order(null,"New Order");
+    	when(orderService.placeOrder(order)).thenReturn(new Order(1L, "Welcome to Mock Land!"));
+    	System.out.println(orderService.placeOrder(order));
+    	assertNotNull(orderService.placeOrder(order));
     }
 }
