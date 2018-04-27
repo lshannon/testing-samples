@@ -1,5 +1,6 @@
 package com.lukeshannon.testing;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.After;
@@ -43,6 +44,17 @@ public class JunitBasicTest
     	assertNotNull(orderService.placeOrder(order));
     	
     }
+	
+	/**
+	 * AssertJ gives more readable asserts
+	 */
+	@Test
+    public void testNameIsCorrect() {
+    	Order order = new Order(null,"New Order");
+    	Order returnOrder = orderService.placeOrder(order);
+    	assertThat(returnOrder.getName()).isNotEmpty().contains("memory");
+    }
+	
 	
 	@Test (expected = NonValidIdException.class)
 	public void testServiceException() throws NonValidIdException {

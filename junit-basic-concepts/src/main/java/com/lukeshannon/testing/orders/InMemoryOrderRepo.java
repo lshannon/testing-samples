@@ -10,6 +10,7 @@ public class InMemoryOrderRepo implements OrderRepo {
 	@Override
 	public Order placeOrder(Order order) {
 		order.setId(new java.util.Date().getTime());
+		order.setName(order.getName() + " (in memory)");
 		orders.put(order.getId(), order);
 		return orders.get(order.getId());
 	}
